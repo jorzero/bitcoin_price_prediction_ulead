@@ -26,3 +26,20 @@ jobs:
 
       - name: Docker push to Dockerhub
         run: docker push jorzero/deploy_bitcoin_price_prediction_ulead:v1
+
+# Connection to EC2
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+            docker stop deploy_bitcoin_price_prediction_ulead || true
+            docker rm -f deploy_bitcoin_price_prediction_ulead || true
+            docker pull jorzero/deploy_bitcoin_price_prediction_ulead:v1
+            docker run -d --name deploy_bitcoin_price_prediction_ulead -p 8000:8000 jorzero/deploy_bitcoin_price_prediction_ulead:v1
+
+      - name: Docker push to Dockerhub
+        run: docker push jorzero/deploy_bitcoin_price_prediction_ulead:v1
