@@ -22,10 +22,10 @@ jobs:
           password: ${{secrets.DOCKER_PASSWORD}}
 
       - name: Build docker image
-        run: docker build -t jorzero/deploy_bitcoin_price_prediction_ulead:v1 .
+        run: docker build -t jorzero/deploy_bitcoin_price_prediction_ulead:dev .
 
       - name: Docker push to Dockerhub
-        run: docker push jorzero/deploy_bitcoin_price_prediction_ulead:v1
+        run: docker push jorzero/deploy_bitcoin_price_prediction_ulead:dev
 
 # Connection to EC2
       - name: Deploy to EC2
@@ -41,5 +41,5 @@ jobs:
               docker rm jorzero/deploy_bitcoin_price_prediction_ulead
             fi
             
-            docker pull ${{ secrets.DOCKER_USERNAME }}/jorzero/deploy_bitcoin_price_prediction_ulead:v1
-            docker run -d --name jorzero/deploy_bitcoin_price_prediction_ulead -p 8000:8000 ${{ secrets.DOCKER_USERNAME }}/jorzero/deploy_bitcoin_price_prediction_ulead:v1
+            docker pull ${{ secrets.DOCKER_USERNAME }}/jorzero/deploy_bitcoin_price_prediction_ulead:dev
+            docker run -d --name jorzero/deploy_bitcoin_price_prediction_ulead -p 8000:8000 ${{ secrets.DOCKER_USERNAME }}/jorzero/deploy_bitcoin_price_prediction_ulead:dev
