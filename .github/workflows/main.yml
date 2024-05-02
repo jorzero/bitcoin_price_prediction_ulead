@@ -42,4 +42,4 @@ jobs:
             fi
             
             docker pull ${{ secrets.DOCKER_USERNAME }}/deploy_bitcoin_price_prediction_ulead:dev
-            docker run -d --name name deploy_bitcoin_price_prediction_ulead -p 8000:8000 ${{ secrets.DOCKER_USERNAME }}/deploy_bitcoin_price_prediction_ulead:dev
+            docker run -d --name deploy_bitcoin_price_prediction_ulead -p 8000:8000 ${{ secrets.DOCKER_USERNAME }}/deploy_bitcoin_price_prediction_ulead:dev
