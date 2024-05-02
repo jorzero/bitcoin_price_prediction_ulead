@@ -36,7 +36,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             docker login -u '${{ secrets.DOCKER_USERNAME }}' -p '${{ secrets.DOCKER_PASSWORD }}'
-            if docker ps --all | grep jorzero/deploy_bitcoin_price_prediction_ulead; then
+            if docker ps --all | grep deploy_bitcoin_price_prediction_ulead; then
               docker stop deploy_bitcoin_price_prediction_ulead
               docker rm deploy_bitcoin_price_prediction_ulead
             fi
