@@ -36,10 +36,10 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             docker login -u '${{ secrets.DOCKER_USERNAME }}' -p '${{ secrets.DOCKER_PASSWORD }}'
-            if docker ps --all | grep jorzero/deploy_bitcoin_price_prediction_ulead; then
-              docker stop jorzero/deploy_bitcoin_price_prediction_ulead
-              docker rm jorzero/deploy_bitcoin_price_prediction_ulead
+            if docker ps --all | grep deploy_bitcoin_price_prediction_ulead; then
+              docker stop deploy_bitcoin_price_prediction_ulead
+              docker rm deploy_bitcoin_price_prediction_ulead
             fi
             
-            docker pull ${{ secrets.DOCKER_USERNAME }}/jorzero/deploy_bitcoin_price_prediction_ulead:dev
-            docker run -d --name jorzero/deploy_bitcoin_price_prediction_ulead -p 8000:8000 ${{ secrets.DOCKER_USERNAME }}/jorzero/deploy_bitcoin_price_prediction_ulead:dev
+            docker pull ${{ secrets.DOCKER_USERNAME }}/deploy_bitcoin_price_prediction_ulead:dev
+            docker run -d --name name deploy_bitcoin_price_prediction_ulead -p 8000:8000 ${{ secrets.DOCKER_USERNAME }}/deploy_bitcoin_price_prediction_ulead:dev
